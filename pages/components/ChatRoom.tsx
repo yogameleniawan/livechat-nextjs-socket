@@ -1,7 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sendMessage, chatbox }) => {
+const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sendMessage, chatbox, socket }) => {
+    const [isWrite, setIsWrite] = useState(false);
+    const [partner, setPartner] = useState("");
+
+    useEffect(() => {
+        socket.on("writeMessageCallback", (data) => {
+            if(data.username !== username) {
+                data.status ? setIsWrite(true) : setIsWrite(false);
+                setPartner(data.username);
+            }
+        });
+    
+      return () => {}
+    }, [])
+    
+    const onChangeMessage = (value) => {
+        setMessage(value);
+    }
+
+    const onFocusMessage = () => {
+        socket.emit("writeMessage", {status: true, username: username})
+    }
+    
     return (
         <div className="flex flex-col">
             <div className="flex flex-col bg-white m-11 h-screen rounded-3xl p-10">
@@ -23,15 +47,18 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                     })}
                     {/* <div id="chat-box" ref={chatbox} /> */}
                 </div>
+                <p className={`text-black ${isWrite ? 'block' : 'hidden'} transition-all`}>{`${partner} sedang mengetik ...`}</p>
                 <div className="message-box rounded-lg">
                     <div className="w-full flex">
                         <input
                         type="text"
                         placeholder="New message..."
                         value={message}
-                        className="outline-none p-4 rounded-full flex-1 bg-gray-100 mr-5 dark:text-black"
-                        onChange={(e) => setMessage(e.target.value)}
+                        className="outline-none p-4 flex-1 bg-gray-100 mr-5 dark:text-black rounded-full transition-all"
+                        onChange={(e) => onChangeMessage(e.target.value)}
                         onKeyUp={handleKeypress}
+                        onFocus={() => onFocusMessage()}
+                        onBlur={() => socket.emit("writeMessage", {status: false, username: username})}
                         />
                         <div className="flex justify-center items-center bg-slate-100 dark:bg-slate-800 rounded-full group hover:bg-slate-500 hover:rounded-tr-md transition-all">
                         <button

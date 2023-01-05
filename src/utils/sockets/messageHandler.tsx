@@ -4,5 +4,11 @@ export default (io, socket) => {
       socket.broadcast.emit("newIncomingMessage", msg);
     };
   
+    const writeMessage = (data) => {
+      socket.broadcast.emit("writeMessageCallback", data);
+    }
+
     socket.on("createdMessage", createdMessage);
+
+    socket.on("writeMessage", writeMessage);
 };

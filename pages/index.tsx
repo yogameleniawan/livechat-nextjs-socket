@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import io from "socket.io-client";
 import React, { useState, useEffect, useRef } from "react";
 import LobyRoom from "./components/LobyRoom";
@@ -17,15 +18,14 @@ export default function Home() {
   const [chosenUsername, setChosenUsername] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<Message>>([]);
-  // const chatbox = useRef(null);
-  const chatbox = useChatScroll(messages)
+  const chatbox = useChatScroll(messages);
+
   useEffect(() => {
     fetch("/api/socket");
 
     socket = io();
 
     socket.on("newIncomingMessage", (msg) => {
-      chatbox.current?.scrollIntoView({ behavior: "smooth" });
       setMessages((currentMsg) => [
         ...currentMsg,
         { author: msg.author, message: msg.message, type: 'incoming' },
@@ -59,7 +59,7 @@ export default function Home() {
       {!chosenUsername ? (
         <LobyRoom username={username} setUsername={setUsername} setChosenUsername={setChosenUsername} />
         ) : (
-          <ChatRoom username={username} messages={messages} message={message} setMessage={setMessage} handleKeypress={handleKeypress} sendMessage={sendMessage} chatbox={chatbox}  />
+          <ChatRoom username={username} messages={messages} message={message} setMessage={setMessage} handleKeypress={handleKeypress} sendMessage={sendMessage} chatbox={chatbox} socket={socket}  />
         )
       }
     </div>
