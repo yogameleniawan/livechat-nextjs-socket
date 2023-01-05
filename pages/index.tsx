@@ -16,11 +16,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Array<Message>>([]);
 
   useEffect(() => {
-    socketInitializer();
-  }, []);
-
-  const socketInitializer = async () => {
-    await fetch("/api/socket");
+    fetch("/api/socket");
 
     socket = io();
 
@@ -31,7 +27,9 @@ export default function Home() {
         { author: msg.author, message: msg.message, type: 'incoming' },
       ]);
     });
-  };
+
+    return () => socket.off("newIncomingMessage");
+  }, []);
 
   const sendMessage = async () => {
     socket.emit("createdMessage", { author: chosenUsername, message, type: 'send' });
