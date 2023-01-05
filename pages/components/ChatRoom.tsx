@@ -1,37 +1,46 @@
-const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sendMessage }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
+
+const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sendMessage, chatbox }) => {
     return (
         <div className="flex flex-col">
-            <div className="flex flex-col justify-between dark:bg-slate-50 bg-slate-900 m-11 h-screen rounded-3xl p-10">
-                <div className="chat-box bg-slate-50 dark:bg-slate-800 h-5/6 p-10 overflow-y-scroll">
+            <div className="flex flex-col bg-white m-11 h-screen rounded-3xl p-10">
+                <div  ref={chatbox} className="chat-box h-full overflow-y-scroll no-scrollbar">
                     {messages.map((msg, i) => {
                         return (
-                            <div
-                            className={msg.type === 'incoming' ? "mr-10 py-1 px-2 my-2 rounded-r-lg rounded-tl-lg bg-slate-200 text-black" : "ml-10 py-1 px-2 my-2 rounded-l-lg rounded-tr-lg bg-white text-black"}
-                            key={i}
-                            >
-                            {msg.message}
+                            <div className="flex flex-col" key={i}>
+                                <div
+                                    className={msg.type === 'incoming' ? "shadow-md mr-28 p-3 my-3 rounded-r-2xl rounded-tl-2xl bg-gray-50 text-black" : "shadow-md ml-28 p-3 my-3 rounded-l-2xl rounded-br-2xl dark:bg-slate-800 bg-slate-100 dark:text-white text-black "}
+                                    key={i}
+                                >
+                                    {msg.message}
+                                </div>
+                                {/* <div className={`text-sm text-black relative ${msg.type === 'incoming' ? 'text-left' : 'text-right'}`}>
+                                    <span>10.00</span>
+                                </div> */}
                             </div>
                         );
                     })}
+                    {/* <div id="chat-box" ref={chatbox} /> */}
                 </div>
-                <div className="message-box bg-slate-50 rounded-lg">
+                <div className="message-box rounded-lg">
                     <div className="w-full flex">
                         <input
                         type="text"
                         placeholder="New message..."
                         value={message}
-                        className="outline-none py-2 px-2 rounded-bl-md flex-1"
+                        className="outline-none p-4 rounded-full flex-1 bg-gray-100 mr-5 dark:text-black"
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyUp={handleKeypress}
                         />
-                        <div className="flex justify-center items-center dark:bg-slate-800 rounded-r-md group hover:bg-slate-500 hover:rounded-r-md transition-all">
+                        <div className="flex justify-center items-center bg-slate-100 dark:bg-slate-800 rounded-full group hover:bg-slate-500 hover:rounded-tr-md transition-all">
                         <button
-                            className="group-hover:text-white px-3 h-full"
+                            className="group-hover:text-white px-5 h-full rounded-full text-slate-800 dark:text-white"
                             onClick={() => {
                             sendMessage();
                             }}
                         >
-                            Send
+                            <FontAwesomeIcon icon={faPaperPlane} />
                         </button>
                         </div>
                     </div>

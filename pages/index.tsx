@@ -1,7 +1,8 @@
 import io from "socket.io-client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LobyRoom from "./components/LobyRoom";
 import ChatRoom from './components/ChatRoom';
+import useChatScroll from "./hooks/useChatScroll";
 
 let socket;
 
@@ -16,14 +17,15 @@ export default function Home() {
   const [chosenUsername, setChosenUsername] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<Message>>([]);
-
+  // const chatbox = useRef(null);
+  const chatbox = useChatScroll(messages)
   useEffect(() => {
     fetch("/api/socket");
 
     socket = io();
 
     socket.on("newIncomingMessage", (msg) => {
-      console.log(msg)
+      chatbox.current?.scrollIntoView({ behavior: "smooth" });
       setMessages((currentMsg) => [
         ...currentMsg,
         { author: msg.author, message: msg.message, type: 'incoming' },
@@ -31,15 +33,17 @@ export default function Home() {
     });
 
     return () => socket.off("newIncomingMessage");
-  }, []);
+  }, []);  
 
   const sendMessage = async () => {
-    socket.emit("createdMessage", { author: chosenUsername, message, type: 'send' });
-    setMessages((currentMsg) => [
-      ...currentMsg,
-      { author: chosenUsername, message, type: 'send' },
-    ]);
-    setMessage("");
+    if (message !== '') {
+      socket.emit("createdMessage", { author: chosenUsername, message, type: 'send' });
+      setMessages((currentMsg) => [
+        ...currentMsg,
+        { author: chosenUsername, message, type: 'send' },
+      ]);
+      setMessage("");
+    }
   };
 
   const handleKeypress = (e) => {
@@ -55,7 +59,7 @@ export default function Home() {
       {!chosenUsername ? (
         <LobyRoom username={username} setUsername={setUsername} setChosenUsername={setChosenUsername} />
         ) : (
-          <ChatRoom username={username} messages={messages} message={message} setMessage={setMessage} handleKeypress={handleKeypress} sendMessage={sendMessage}  />
+          <ChatRoom username={username} messages={messages} message={message} setMessage={setMessage} handleKeypress={handleKeypress} sendMessage={sendMessage} chatbox={chatbox}  />
         )
       }
     </div>
