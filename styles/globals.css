@@ -121,3 +121,8 @@ a {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+.dark-mode-main {
+  @apply bg-slate-100 dark:bg-slate-800 text-black dark:text-white
+}
+

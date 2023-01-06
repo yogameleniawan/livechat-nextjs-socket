@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import LobyRoom from "./components/LobyRoom";
 import ChatRoom from './components/ChatRoom';
 import useChatScroll from "./hooks/useChatScroll";
-import DarkModeSwitch from './components/DarkModeSwitch';
+import DarkMode from './components/DarkMode';
 
 let socket;
 
@@ -55,8 +55,8 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-slate-100 dark:bg-slate-800 ">
-      <DarkModeSwitch />
+    <div className="dark-mode-main">
+      <DarkMode />
       {!chosenUsername ? (
         <LobyRoom username={username} setUsername={setUsername} setChosenUsername={setChosenUsername} />
         ) : (

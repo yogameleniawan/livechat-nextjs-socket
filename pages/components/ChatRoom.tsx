@@ -64,15 +64,15 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                         onFocus={() => onFocusMessage()}
                         onBlur={() => socket.emit("writeMessage", {status: false, username: username})}
                         />
-                        <div className="flex justify-center items-center bg-slate-100 dark:bg-slate-800 rounded-full group hover:bg-slate-500 hover:rounded-tr-md transition-all">
-                        <button
-                            className="group-hover:text-white px-5 h-full rounded-full text-slate-800 dark:text-white"
-                            onClick={() => {
-                            sendMessage();
-                            }}
-                        >
-                            <FontAwesomeIcon icon={faPaperPlane} />
-                        </button>
+                        <div className="flex justify-center items-center bg-slate-100 dark:bg-slate-800 rounded-full group hover:bg-slate-800 hover:rounded-tr-md transition-all">
+                            <button
+                                className="group-hover:text-white px-5 h-full rounded-full text-slate-800 dark:text-white"
+                                onClick={() => {
+                                sendMessage();
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faPaperPlane} />
+                            </button>
                         </div>
                     </div>
                 </div>
