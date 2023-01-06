@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import LobyRoom from "./components/LobyRoom";
 import ChatRoom from './components/ChatRoom';
 import useChatScroll from "./hooks/useChatScroll";
+import useDarkSide from './hooks/useDarkSide';
+import { useTheme } from "next-themes";
 
 let socket;
 
@@ -19,10 +21,10 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Array<Message>>([]);
   const chatbox = useChatScroll(messages);
-
+  const { theme, setTheme } = useTheme();
+  
   useEffect(() => {
     fetch("/api/socket");
-
     socket = io();
 
     socket.on("newIncomingMessage", (msg) => {
@@ -55,7 +57,9 @@ export default function Home() {
   };
 
   return (
-    <div className="dark:bg-slate-800 bg-slate-100">
+    <div className="bg-slate-100 dark:bg-slate-800 ">
+      <button onClick={ () => setTheme("light") }>Light</button>
+      <button onClick={ () => setTheme("dark") }>Dark</button>
       {!chosenUsername ? (
         <LobyRoom username={username} setUsername={setUsername} setChosenUsername={setChosenUsername} />
         ) : (

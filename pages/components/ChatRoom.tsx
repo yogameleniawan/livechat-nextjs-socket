@@ -27,8 +27,11 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
     }
     
     return (
-        <div className="flex flex-col">
-            <div className="flex flex-col bg-white m-11 h-screen rounded-3xl p-10">
+        <div className="flex flex-row">
+            <div className="flex flex-col bg-white ml-11 mr-7 my-11 w-3/5 h-screen rounded-3xl p-10">
+                
+            </div>
+            <div className="flex flex-col bg-white mr-11 my-11 h-screen w-screen rounded-3xl p-10">
                 <div  ref={chatbox} className="chat-box h-full overflow-y-scroll no-scrollbar">
                     {messages.map((msg, i) => {
                         return (
@@ -45,10 +48,11 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                             </div>
                         );
                     })}
-                    {/* <div id="chat-box" ref={chatbox} /> */}
                 </div>
-                <p className={`text-black ${isWrite ? 'block' : 'hidden'} transition-all`}>{`${partner} sedang mengetik ...`}</p>
-                <div className="message-box rounded-lg">
+                <div className="relative">
+                    <div className={`bg-gray-100 p-3 rounded-r-2xl rounded-tl-2xl absolute left-3 translate-y-0 text-black ${isWrite ? '-translate-y-14 z-0' : 'translate-y-0 z-0'} transition-all`}>{`${partner} sedang mengetik ...`}</div>
+                </div>
+                <div className="message-box rounded-lg z-10">
                     <div className="w-full flex">
                         <input
                         type="text"
