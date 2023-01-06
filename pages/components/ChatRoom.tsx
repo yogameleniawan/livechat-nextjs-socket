@@ -58,7 +58,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                         type="text"
                         placeholder="New message..."
                         value={message}
-                        className="outline-none p-4 flex-1 bg-gray-100 mr-5 dark:text-black rounded-full transition-all"
+                        className="outline-none p-4 flex-1 bg-gray-100 mr-5 text-black  rounded-full transition-all"
                         onChange={(e) => onChangeMessage(e.target.value)}
                         onKeyUp={handleKeypress}
                         onFocus={() => onFocusMessage()}

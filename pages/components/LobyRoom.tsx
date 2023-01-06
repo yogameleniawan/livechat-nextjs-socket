@@ -9,7 +9,7 @@ const LobyRoom = ({username, setUsername, setChosenUsername}) => {
                     type="text"
                     placeholder="Identity..."
                     value={username}
-                    className="p-3 rounded-md outline-none"
+                    className="p-3 rounded-md outline-none text-black dark:text-white"
                     onChange={(e) => setUsername(e.target.value)}
                   />
                   <button
