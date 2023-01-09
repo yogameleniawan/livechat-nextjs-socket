@@ -3,7 +3,7 @@ const LobyRoom = ({username, setUsername, setChosenUsername}) => {
         <div className="flex items-center p-4 mx-auto min-h-screen justify-center">
             <main className="gap-4 flex flex-col items-center justify-center w-full h-full">
                   <h3 className="font-bold text-black dark:text-white text-xl">
-                    How people should call you?
+                    What is your name?
                   </h3>
                   <input
                     type="text"

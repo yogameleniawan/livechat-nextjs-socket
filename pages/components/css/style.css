@@ -1,0 +1,11 @@
+.online-indicator {
+    @apply absolute bg-green-400 border-white border-2 p-1.5 rounded-full right-0 bottom-2;
+}
+
+.incoming-message {
+    @apply bg-red-400 py-1 px-1.5 text-white rounded-full text-xs mt-2 mx-2;
+}
+
+.mobile-incoming-message {
+    @apply -top-6 right-4 sm:hidden bg-red-400 py-1 px-1.5 absolute text-white rounded-full text-xs mt-6 mx-2;
+}
