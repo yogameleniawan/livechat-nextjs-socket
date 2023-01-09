@@ -55,7 +55,7 @@ export default function Home() {
   };
 
   return (
-    <div className="dark-mode-main">
+    <div className="dark-mode-main p-4">
       <DarkMode />
       {!chosenUsername ? (
         <LobyRoom username={username} setUsername={setUsername} setChosenUsername={setChosenUsername} />

@@ -122,6 +122,30 @@ a {
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 60px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 60px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #9CA3AF;
+  border-radius: 60px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5f646b;
+}
+
 .dark-mode-main {
   @apply bg-slate-100 dark:bg-slate-800 text-black dark:text-white
 }
