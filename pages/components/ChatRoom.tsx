@@ -34,7 +34,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
     
     return (
         <div className="flex flex-col sm:flex-row md:flex-row m-4">
-            <div className="flex flex-nowrap overflow-x-scroll sm:flex-col bg-white sm:ml-11 sm:mr-7 sm:my-11 w-full md:w-3/5 lg:w-3/5 sm:h-screen rounded-3xl sm:p-10 p-6">
+            <div className="flex flex-nowrap overflow-y-scroll sm:flex-col bg-white sm:ml-11 sm:mr-7 sm:my-11 w-full md:w-3/5 lg:w-3/5 sm:h-screen rounded-3xl sm:p-10 p-6">
                 <Participants />
                 <Participants />
                 <Participants />

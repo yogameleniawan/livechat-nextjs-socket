@@ -9,3 +9,11 @@
 .mobile-incoming-message {
     @apply -top-6 right-4 sm:hidden bg-red-400 py-1 px-1.5 absolute text-white rounded-full text-xs mt-6 mx-2;
 }
+
+.max-w-mobile {
+    max-width: 20px;
+}
+
+.max-w-dekstop {
+    max-width: 100%;
+}
