@@ -2,6 +2,18 @@
     @apply absolute bg-green-400 border-white border-2 p-1.5 rounded-full right-0 bottom-2;
 }
 
+.online-indicator-mobile {
+    @apply bg-green-400 border-white border-2 p-1.5 rounded-full left-8 bottom-2;
+}
+
+.offline-indicator {
+    @apply absolute bg-gray-400 border-white border-2 p-1.5 rounded-full right-0 bottom-2;
+}
+
+.offline-indicator-mobile {
+    @apply bg-gray-400 border-white border-2 p-1.5 rounded-full left-8 bottom-2;
+}
+
 .incoming-message {
     @apply bg-red-400 py-1 px-1.5 text-white rounded-full text-xs mt-2 mx-2;
 }
