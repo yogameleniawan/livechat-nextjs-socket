@@ -35,7 +35,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
     
     return (
         <div className="flex flex-col sm:flex-row md:flex-row">
-            <div className="flex flex-nowrap overflow-auto sm:flex-col bg-white dark:bg-slate-500 sm:ml-11 sm:mr-7 sm:my-11 w-full md:w-3/5 lg:w-3/5 sm:h-screen rounded-3xl sm:p-10 p-2">
+            <div className="flex flex-nowrap overflow-auto sm:flex-col bg-white dark:bg-slate-500 sm:ml-11 sm:mr-7 sm:my-11 w-full md:w-3/5 lg:w-3/5 sm:h-screen rounded-3xl  p-2">
                 <Participants />
                 <Participants />
                 <Participants />
@@ -47,7 +47,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                 <Participants />
                 <Participants />
             </div>
-            <div className="flex flex-col bg-white dark:bg-slate-500 mr-11 my-11 h-screen w-full sm:w-screen rounded-3xl p-10">
+            <div className="flex flex-col bg-white dark:bg-slate-500 mr-11 my-11 h-screen w-full sm:w-screen rounded-3xl lg:p-10 p-4">
                 <div className="flex flex-row bg-white dark:bg-slate-800 text-black dark:text-white rounded-xl shadow-lg items-center justify-between px-4">
                     <div className="photo px-1 py-2">
                         <Image className="rounded-full w-10 max-w-fit sm:max-w-dekstop md:w-14 lg:w-14 xl:w-14" src="https://picsum.photos/300/300" alt="Image Photo" width="300" height="300" />
@@ -73,7 +73,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                     <div className={`text-xs bg-gray-100 p-2 rounded-r-2xl rounded-tl-2xl absolute left-3 translate-y-0 text-black ${isWrite ? '-translate-y-10 z-0' : 'translate-y-0 z-0'} transition-all`}>{`${partner} is writing ...`}</div>
                 </div>
                 <div className="message-box rounded-lg z-10">
-                    <div className="w-full flex">
+                    <div className="w-full flex overflow-auto pb-2">
                         <input
                         type="text"
                         placeholder="New message..."
