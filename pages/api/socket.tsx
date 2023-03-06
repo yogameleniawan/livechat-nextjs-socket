@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import messageHandler from "../../src/utils/sockets/messageHandler";
+import messageHandler from "./messageHandler";
 
 export default function SocketHandler(req, res) {
   if (res.socket.server.io) {

@@ -11,38 +11,31 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
 
     useEffect(() => {
         socket.on("writeMessageCallback", (data) => {
-            if(data.username !== username) {
+            if (data.username !== username) {
                 data.status ? setIsWrite(true) : setIsWrite(false);
                 setPartner(data.username);
             }
         });
-    
-      return () => {}
+
+        return () => { }
     }, [])
 
     useEffect(() => {
-        const delayWrite =  setTimeout(() => {
+        const delayWrite = setTimeout(() => {
             setIsWrite(false);
         }, 3000); // set time out if user doesn't type message in 3 seconds
-    
+
         return () => clearTimeout(delayWrite)
-      }, [isWrite])
-    
+    }, [isWrite])
+
     const onChangeMessage = (value) => {
         setMessage(value);
-        socket.emit("writeMessage", {status: true, username: username})
+        socket.emit("writeMessage", { status: true, username: username })
     }
-    
+
     return (
         <div className="flex flex-col sm:flex-row md:flex-row">
             <div className="flex flex-nowrap overflow-auto sm:flex-col bg-white dark:bg-slate-500 sm:ml-11 sm:mr-7 sm:my-11 w-full md:w-3/5 lg:w-3/5 sm:h-screen rounded-3xl  p-2">
-                <Participants />
-                <Participants />
-                <Participants />
-                <Participants />
-                <Participants />
-                <Participants />
-                <Participants />
                 <Participants />
                 <Participants />
                 <Participants />
@@ -55,7 +48,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                     <span className="font-bold overflow-hidden whitespace-nowrap text-ellipsis">Nama Partisipantssssssssssssssssssssssssssssss</span>
                     <div className="online-indicator-mobile"></div>
                 </div>
-                <div  ref={chatbox} className="chat-box h-full overflow-auto no-scrollbar">
+                <div ref={chatbox} className="chat-box h-full overflow-auto no-scrollbar">
                     {messages.map((msg, i) => {
                         return (
                             <div className="flex flex-col" key={i}>
@@ -75,19 +68,19 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
                 <div className="message-box rounded-lg z-10">
                     <div className="w-full flex overflow-auto pb-2">
                         <input
-                        type="text"
-                        placeholder="New message..."
-                        value={message}
-                        className="outline-none p-4 flex-1 bg-gray-100 mr-5 text-black  rounded-full transition-all"
-                        onChange={(e) => onChangeMessage(e.target.value)}
-                        onKeyUp={handleKeypress}
-                        onBlur={() => socket.emit("writeMessage", {status: false, username: username})}
+                            type="text"
+                            placeholder="New message..."
+                            value={message}
+                            className="outline-none p-4 flex-1 bg-gray-100 mr-5 text-black  rounded-full transition-all"
+                            onChange={(e) => onChangeMessage(e.target.value)}
+                            onKeyUp={handleKeypress}
+                            onBlur={() => socket.emit("writeMessage", { status: false, username: username })}
                         />
                         <div className="flex justify-center items-center bg-slate-100 dark:bg-slate-800 rounded-full group hover:bg-slate-800 hover:rounded-tr-md transition-all">
                             <button
                                 className="group-hover:text-white px-5 h-full rounded-full text-slate-800 dark:text-white"
                                 onClick={() => {
-                                sendMessage();
+                                    sendMessage();
                                 }}
                             >
                                 <FontAwesomeIcon icon={faPaperPlane} />
