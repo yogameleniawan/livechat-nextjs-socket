@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
 import { useEffect } from 'react';
@@ -11,8 +12,8 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
 
     useEffect(() => {
         socket.on("writeMessageCallback", (data) => {
-            if (data.username !== username) {
-                data.status ? setIsWrite(true) : setIsWrite(false);
+            if (data.username !== username) { // if user is not the one who is typing
+                data.status ? setIsWrite(true) : setIsWrite(false); // set isWrite to true if user is typing
                 setPartner(data.username);
             }
         });
@@ -26,7 +27,7 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
         }, 3000); // set time out if user doesn't type message in 3 seconds
 
         return () => clearTimeout(delayWrite)
-    }, [isWrite])
+    }, [isWrite]) // reset isWrite to false if user doesn't type message in 3 seconds
 
     const onChangeMessage = (value) => {
         setMessage(value);
@@ -93,4 +94,4 @@ const ChatRoom = ({ username, messages, message, setMessage, handleKeypress, sen
     )
 }
 
-export default ChatRoom;
+export default ChatRoom; 

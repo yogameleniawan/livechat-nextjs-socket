@@ -9,6 +9,10 @@ export default (io, socket) => {
     socket.broadcast.emit("writeMessageCallback", data);
   }
 
+  const openMessage = (data) => {
+    socket.broadcast.emit("openMessageCallback", data);
+  }
+
   socket.on("createdMessage", createdMessage);
 
   socket.on("writeMessage", writeMessage);
