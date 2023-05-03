@@ -1,6 +1,6 @@
 # Live Chat Next JS & Socket IO
 
-## Technologies
+## Prerequisites
 
 - [NextJS](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
